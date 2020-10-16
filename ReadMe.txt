@@ -7,6 +7,7 @@ update css. this immediately after seperate components
 can post to github after 
 
 characters gear shown 
+-make api call to grab all the character data
 -display clickable images of gear
 -onClick will display the stats of the item
 -possibly seperate into suffix and prefix
