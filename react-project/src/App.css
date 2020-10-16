@@ -2,4 +2,14 @@
   text-align: center;
 }
 
+form {
+  display: block;
+}
 
+input {
+  margin: 10px;
+}
+
+.char-select, select{
+  margin: 10px;
+}

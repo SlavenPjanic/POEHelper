@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import CharComp from "./characterComponent"
 
 class POEHelper extends Component{
     constructor(props) {
@@ -11,8 +12,10 @@ class POEHelper extends Component{
           filteredDropDown: [],
           dropDownLeague: [],
           selectedChar: '',
+          renderView: 0,
           items: []
         };
+        this.baseState = this.state;
       }
 
       createSelectedItems() { //create the character dropdown list and the league drop down list
@@ -73,24 +76,45 @@ class POEHelper extends Component{
         }
       }
 
-      render() {
-        const isLoaded = this.state.isLoaded;
+      onLoadCharacter = () => {
+        this.setState({renderView: 1});
+      }
 
-        let charSelect, leagueSelect;
-        if(isLoaded){
+      returnCallBack = (returnCode) => {
+        if(returnCode === 2){
+          this.setState(this.baseState);
+        }else{
+          this.setState({renderView: returnCode});
+        }
+      }
+
+      render() {
+
+        let charSelect, leagueSelect, loadCharButton;
+        if(this.state.isLoaded){
           charSelect = <select type="select" onChange={this.onDropdownSelected} label="Select Character"> {this.state.filteredDropDown} </select>;
-          leagueSelect = <select type="select" onChange={this.onLeagueSelected} > {this.state.dropDownLeague} </select>;     
+          leagueSelect = <select  type="select" onChange={this.onLeagueSelected} > {this.state.dropDownLeague} </select>;     
+          loadCharButton = <button onClick={this.onLoadCharacter}>Load Character</button>
         }
         
-        return (
-        <form onSubmit={this.mySubmitHandler}>
-            <input type="text" onChange={this.myChangeHandler} />
-            <input type="submit" />
-            
-            {charSelect}
-            {leagueSelect}
-        </form>
-        )
+        switch (this.state.renderView){
+          case 1:
+            return <CharComp accntName={this.state.accntName} charName={this.state.selectedChar} returnCallBack={this.returnCallBack}/>;
+          default:
+            return (
+              <form onSubmit={this.mySubmitHandler}>
+                  <input type="text" defaultValue={this.state.accntName} onChange={this.myChangeHandler} />
+                  <input type="submit" />
+                  
+                  <div className="char-select">
+                  {charSelect}
+                  {leagueSelect}
+                  {loadCharButton}
+                  </div>
+              </form>
+              )
+        }
+
       }
     
     }

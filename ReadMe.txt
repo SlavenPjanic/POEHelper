@@ -1,7 +1,3 @@
-Order the list by league then by name. 
--fill a new list with the applicable leagues
--make an onChange to filter the first list
-
 check if the account is valid
 check if the account has characters
 
@@ -11,6 +7,8 @@ update css. this immediately after seperate components
 can post to github after 
 
 characters gear shown 
+-display clickable images of gear
+-onClick will display the stats of the item
 -possibly seperate into suffix and prefix
 
 
@@ -24,4 +22,6 @@ button to accept the input
 dropdown box with character names, level, ascendancy and associated leagues
 
 0.002
-
+Order the list by league then by name. 
+-fill a new list with the applicable leagues
+-make an onChange to filter the first list
