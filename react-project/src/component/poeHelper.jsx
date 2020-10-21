@@ -24,7 +24,6 @@ class POEHelper extends Component{
               + i.level + " " + i.class + ", " + i.league + " league."}</option>
           ));
 
-          //let leagueArray = this.state.items.map(x => (x.league));
           let leagueArray = [...new Set(this.state.items.map(x => (x.league)))];
           let holder2 = [<option key='All' value='All'> All </option> ];
           for(let x = 0; x < leagueArray.length; x++){
