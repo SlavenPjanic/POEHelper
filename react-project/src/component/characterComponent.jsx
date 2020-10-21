@@ -3,35 +3,73 @@ import React, {Component} from "react";
 class CharComp extends Component {
     constructor(props) {
         super(props);
-
-        let itemRef = new Array(15);
-
         this.state = {
           error: null,
           accntName: this.props.accntName,
           charName: this.props.charName,
           currentItems: [],
           inventoryImages: [
-              <img src="" id="Weapon" ref={(input) => {itemRef[0] = input}} alt="Weapon"/>,
-              <img src="" id="Helm" ref={(input) => {itemRef[1] = input}} alt="Helm"/>,
-              <img src="" id="BodyArmour" ref={(input) => {itemRef[2] = input}} alt="BodyArmour"/>,
-              <img src="" id="Offhand" ref={(input) => {itemRef[3] = input}} alt="Offhand"/>,
-              <img src="" id="Amulet" ref={(input) => {itemRef[4] = input}} alt="Amulet"/>,
-              <img src="" id="Ring" ref={(input) => {itemRef[5] = input}} alt="Left Ring"/>,
-              <img src="" id="Ring2" ref={(input) => {itemRef[6] = input}} alt="Right Ring"/>,
-              <img src="" id="Gloves" ref={(input) => {itemRef[7] = input}} alt="Gloves"/>,
-              <img src="" id="Belt" ref={(input) => {itemRef[8] = input}} alt="Belt"/>,
-              <img src="" id="Boots" ref={(input) => {itemRef[9] = input}} alt="Boots"/>,
-              <img src="" id="Flask0" ref={(input) => {itemRef[10] = input}} alt="First Flask"/>,
-              <img src="" id="Flask1" ref={(input) => {itemRef[11] = input}} alt="Second Flask"/>,
-              <img src="" id="Flask2" ref={(input) => {itemRef[12] = input}} alt="Third Flask"/>,
-              <img src="" id="Flask3" ref={(input) => {itemRef[13] = input}} alt="Fourth Flask"/>,
-              <img src="" id="Flask4" ref={(input) => {itemRef[14] = input}} alt="Fifth Flask"/>
+               {key:"Weapon",
+               src:""},
+               {key:"Helm",
+               src:""},
+               {key:"BodyArmour",
+               src:""},
+               {key:"Offhand",
+               src:""},
+               {key:"Amulet",
+               src:""},
+               {key:"Ring",
+               src:""},
+               {key:"Ring2",
+               src:""},
+               {key:"Gloves",
+               src:""},
+               {key:"Belt",
+               src:""},
+               {key:"Boots",
+               src:""},
+               {key:"Flask0",
+               src:""},
+               {key:"Flask1",
+               src:""},
+               {key:"Flask2",
+               src:""},
+               {key:"Flask3",
+               src:""},
+               {key:"Flask4",
+               src:""}
           ]
         };
       }
 
+      createImages = () =>{
 
+        for(let i = 0; i < this.state.currentItems.length; i++){
+            //dont need MainInventory
+            if(this.state.currentItems[i].inventoryId !== "MainInventory"){
+                //find where to place the item 
+                let pos;
+                if(this.state.currentItems[i].inventoryId === "Flask"){ //check which flask it is
+                    pos = this.state.inventoryImages.map(function(img) {return img.key;}).indexOf(this.state.currentItems[i].inventoryId + this.state.currentItems[i].x);    
+                }else{
+                    pos = this.state.inventoryImages.map(function(img) {return img.key;}).indexOf(this.state.currentItems[i].inventoryId);
+                }
+                if(pos !== -1){
+                    let items = [...this.state.inventoryImages];
+                    let item = {...items[pos]};
+                    item.src = this.state.currentItems[i].icon;
+                    items[pos] = item;
+                    this.setState({inventoryImages: items});
+                }
+            }
+        }
+        //go thru json
+        //match the inventoryId to key
+            //incase of flasks check for x position for flasks 1-5
+        //update img url
+
+    }
 
     componentDidMount() {
         console.log(this.state.accntName + "  " + this.state.charName)
@@ -41,7 +79,7 @@ class CharComp extends Component {
           (result) => {
             this.setState({
               isLoaded: true,
-              currentItems: result,
+              currentItems: result.items,
             });
             this.createImages();
           },
@@ -55,20 +93,8 @@ class CharComp extends Component {
         )
     }  
 
-    createImages = () =>{
-
-        // for(let i = 0; i < this.state.currentItems.length; i++){
-        //     let temp  = this.state.inventoryImages.indexOf(currentItems[i].inventoryId);
-        // }
-        //go thru json
-        //find the 
-
-    }
-
     onReturnClick = (returnCode) => {
-        console.log(this.state.inventoryImages);
-        console.log(this.itemRef);
-        //this.props.returnCallBack(returnCode);
+        this.props.returnCallBack(returnCode);
     }
 
     render(){
@@ -76,6 +102,21 @@ class CharComp extends Component {
             <div>
                 <button onClick={() => this.onReturnClick(0)}>Choose new Character</button>
                 <button onClick={() => this.onReturnClick(2)}>Choose new Account</button>
+                <img src={this.state.inventoryImages[0].src} key="Weapon" alt="Weapon"/>
+                <img src={this.state.inventoryImages[1].src} key="Helm" alt="Helm"/>
+                <img src={this.state.inventoryImages[2].src} key="BodyArmour" alt="BodyArmour"/>
+                <img src={this.state.inventoryImages[3].src} key="Offhand" alt="Offhand"/>
+                <img src={this.state.inventoryImages[4].src} key="Amulet" alt="Amulet"/>
+                <img src={this.state.inventoryImages[5].src} key="Ring" alt="Left Ring"/>
+                <img src={this.state.inventoryImages[6].src} key="Ring2" alt="Right Ring"/>
+                <img src={this.state.inventoryImages[7].src} key="Gloves" alt="Gloves"/>
+                <img src={this.state.inventoryImages[8].src} key="Belt" alt="Belt"/>
+                <img src={this.state.inventoryImages[9].src} key="Boots" alt="Boots"/>
+                <img src={this.state.inventoryImages[10].src} key="Flask0" alt="First Flask"/>
+                <img src={this.state.inventoryImages[11].src} key="Flask1" alt="Second Flask"/>
+                <img src={this.state.inventoryImages[12].src} key="Flask2" alt="Third Flask"/>
+                <img src={this.state.inventoryImages[13].src} key="Flask3" alt="Fourth Flask"/>
+                <img src={this.state.inventoryImages[14].src} key="Flask4" alt="Fifth Flask"/>
             </div>
         )
     }
