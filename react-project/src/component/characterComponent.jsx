@@ -60,7 +60,8 @@ class CharComp extends Component {
         // for(let i = 0; i < this.state.currentItems.length; i++){
         //     let temp  = this.state.inventoryImages.indexOf(currentItems[i].inventoryId);
         // }
-
+        //go thru json
+        //find the 
 
     }
 
