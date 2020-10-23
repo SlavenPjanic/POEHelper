@@ -8,6 +8,7 @@ class CharComp extends Component {
           accntName: this.props.accntName,
           charName: this.props.charName,
           currentItems: [],
+          itemInfo: "",
           inventoryImages: [
                {key:"Weapon",
                src:""},
@@ -93,7 +94,7 @@ class CharComp extends Component {
     }
 
     onImageClick = (event) => {
-        
+        // grab implicitMods and explicitMods and craftedMods and enchantMods, seperate them as well
     }
 
     render(){
@@ -116,6 +117,7 @@ class CharComp extends Component {
                 <img src={this.state.inventoryImages[12].src} key="Flask2" alt="Third Flask" onClick={this.onImageClick}/>
                 <img src={this.state.inventoryImages[13].src} key="Flask3" alt="Fourth Flask" onClick={this.onImageClick}/>
                 <img src={this.state.inventoryImages[14].src} key="Flask4" alt="Fifth Flask" onClick={this.onImageClick}/>
+                <textarea >{this.state.itemInfo}</textarea>
             </div>
         )
     }
