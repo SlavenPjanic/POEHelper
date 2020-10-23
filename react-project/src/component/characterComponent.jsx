@@ -64,11 +64,6 @@ class CharComp extends Component {
                 }
             }
         }
-        //go thru json
-        //match the inventoryId to key
-            //incase of flasks check for x position for flasks 1-5
-        //update img url
-
     }
 
     componentDidMount() {
@@ -97,26 +92,30 @@ class CharComp extends Component {
         this.props.returnCallBack(returnCode);
     }
 
+    onImageClick = (event) => {
+        
+    }
+
     render(){
         return (
             <div>
                 <button onClick={() => this.onReturnClick(0)}>Choose new Character</button>
                 <button onClick={() => this.onReturnClick(2)}>Choose new Account</button>
-                <img src={this.state.inventoryImages[0].src} key="Weapon" alt="Weapon"/>
-                <img src={this.state.inventoryImages[1].src} key="Helm" alt="Helm"/>
-                <img src={this.state.inventoryImages[2].src} key="BodyArmour" alt="BodyArmour"/>
-                <img src={this.state.inventoryImages[3].src} key="Offhand" alt="Offhand"/>
-                <img src={this.state.inventoryImages[4].src} key="Amulet" alt="Amulet"/>
-                <img src={this.state.inventoryImages[5].src} key="Ring" alt="Left Ring"/>
-                <img src={this.state.inventoryImages[6].src} key="Ring2" alt="Right Ring"/>
-                <img src={this.state.inventoryImages[7].src} key="Gloves" alt="Gloves"/>
-                <img src={this.state.inventoryImages[8].src} key="Belt" alt="Belt"/>
-                <img src={this.state.inventoryImages[9].src} key="Boots" alt="Boots"/>
-                <img src={this.state.inventoryImages[10].src} key="Flask0" alt="First Flask"/>
-                <img src={this.state.inventoryImages[11].src} key="Flask1" alt="Second Flask"/>
-                <img src={this.state.inventoryImages[12].src} key="Flask2" alt="Third Flask"/>
-                <img src={this.state.inventoryImages[13].src} key="Flask3" alt="Fourth Flask"/>
-                <img src={this.state.inventoryImages[14].src} key="Flask4" alt="Fifth Flask"/>
+                <img src={this.state.inventoryImages[0].src} key="Weapon" alt="Weapon" onClick={this.onImageClick}/>
+                <img src={this.state.inventoryImages[1].src} key="Helm" alt="Helm" onClick={this.onImageClick}/>
+                <img src={this.state.inventoryImages[2].src} key="BodyArmour" alt="BodyArmour" onClick={this.onImageClick}/>
+                <img src={this.state.inventoryImages[3].src} key="Offhand" alt="Offhand" onClick={this.onImageClick}/>
+                <img src={this.state.inventoryImages[4].src} key="Amulet" alt="Amulet" onClick={this.onImageClick}/>
+                <img src={this.state.inventoryImages[5].src} key="Ring" alt="Left Ring" onClick={this.onImageClick}/>
+                <img src={this.state.inventoryImages[6].src} key="Ring2" alt="Right Ring" onClick={this.onImageClick}/>
+                <img src={this.state.inventoryImages[7].src} key="Gloves" alt="Gloves" onClick={this.onImageClick}/>
+                <img src={this.state.inventoryImages[8].src} key="Belt" alt="Belt" onClick={this.onImageClick}/>
+                <img src={this.state.inventoryImages[9].src} key="Boots" alt="Boots" onClick={this.onImageClick}/>
+                <img src={this.state.inventoryImages[10].src} key="Flask0" alt="First Flask" onClick={this.onImageClick}/>
+                <img src={this.state.inventoryImages[11].src} key="Flask1" alt="Second Flask" onClick={this.onImageClick}/>
+                <img src={this.state.inventoryImages[12].src} key="Flask2" alt="Third Flask" onClick={this.onImageClick}/>
+                <img src={this.state.inventoryImages[13].src} key="Flask3" alt="Fourth Flask" onClick={this.onImageClick}/>
+                <img src={this.state.inventoryImages[14].src} key="Flask4" alt="Fifth Flask" onClick={this.onImageClick}/>
             </div>
         )
     }
