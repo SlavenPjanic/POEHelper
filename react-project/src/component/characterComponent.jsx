@@ -93,8 +93,12 @@ class CharComp extends Component {
         this.props.returnCallBack(returnCode);
     }
 
-    onImageClick = (event) => {
+    onImageClick = (item) => {
         // grab implicitMods and explicitMods and craftedMods and enchantMods, seperate them as well
+        let pos = this.state.currentItems.map(function(items) {return items.inventoryId;}).indexOf(item);
+        if(pos !== -1){
+            
+        }
     }
 
     render(){
@@ -102,22 +106,21 @@ class CharComp extends Component {
             <div>
                 <button onClick={() => this.onReturnClick(0)}>Choose new Character</button>
                 <button onClick={() => this.onReturnClick(2)}>Choose new Account</button>
-                <img src={this.state.inventoryImages[0].src} key="Weapon" alt="Weapon" onClick={this.onImageClick}/>
-                <img src={this.state.inventoryImages[1].src} key="Helm" alt="Helm" onClick={this.onImageClick}/>
-                <img src={this.state.inventoryImages[2].src} key="BodyArmour" alt="BodyArmour" onClick={this.onImageClick}/>
-                <img src={this.state.inventoryImages[3].src} key="Offhand" alt="Offhand" onClick={this.onImageClick}/>
-                <img src={this.state.inventoryImages[4].src} key="Amulet" alt="Amulet" onClick={this.onImageClick}/>
-                <img src={this.state.inventoryImages[5].src} key="Ring" alt="Left Ring" onClick={this.onImageClick}/>
-                <img src={this.state.inventoryImages[6].src} key="Ring2" alt="Right Ring" onClick={this.onImageClick}/>
-                <img src={this.state.inventoryImages[7].src} key="Gloves" alt="Gloves" onClick={this.onImageClick}/>
-                <img src={this.state.inventoryImages[8].src} key="Belt" alt="Belt" onClick={this.onImageClick}/>
-                <img src={this.state.inventoryImages[9].src} key="Boots" alt="Boots" onClick={this.onImageClick}/>
-                <img src={this.state.inventoryImages[10].src} key="Flask0" alt="First Flask" onClick={this.onImageClick}/>
-                <img src={this.state.inventoryImages[11].src} key="Flask1" alt="Second Flask" onClick={this.onImageClick}/>
-                <img src={this.state.inventoryImages[12].src} key="Flask2" alt="Third Flask" onClick={this.onImageClick}/>
-                <img src={this.state.inventoryImages[13].src} key="Flask3" alt="Fourth Flask" onClick={this.onImageClick}/>
-                <img src={this.state.inventoryImages[14].src} key="Flask4" alt="Fifth Flask" onClick={this.onImageClick}/>
-                <textarea >{this.state.itemInfo}</textarea>
+                <img src={this.state.inventoryImages[0].src} key="Weapon" alt="Weapon" onClick={this.onImageClick("Weapon")}/>
+                <img src={this.state.inventoryImages[1].src} key="Helm" alt="Helm" onClick={this.onImageClick("Helm")}/>
+                <img src={this.state.inventoryImages[2].src} key="BodyArmour" alt="BodyArmour" onClick={this.onImageClick("BodyArmour")}/>
+                <img src={this.state.inventoryImages[3].src} key="Offhand" alt="Offhand" onClick={this.onImageClick("Offhand")}/>
+                <img src={this.state.inventoryImages[4].src} key="Amulet" alt="Amulet" onClick={this.onImageClick("Amulet")}/>
+                <img src={this.state.inventoryImages[5].src} key="Ring" alt="Left Ring" onClick={this.onImageClick("Ring")}/>
+                <img src={this.state.inventoryImages[6].src} key="Ring2" alt="Right Ring" onClick={this.onImageClick("Ring2")}/>
+                <img src={this.state.inventoryImages[7].src} key="Gloves" alt="Gloves" onClick={this.onImageClick("Gloves")}/>
+                <img src={this.state.inventoryImages[8].src} key="Belt" alt="Belt" onClick={this.onImageClick("Belt")}/>
+                <img src={this.state.inventoryImages[9].src} key="Boots" alt="Boots" onClick={this.onImageClick("Boots")}/>
+                <img src={this.state.inventoryImages[10].src} key="Flask0" alt="First Flask" onClick={this.onImageClick("Flask0")}/>
+                <img src={this.state.inventoryImages[11].src} key="Flask1" alt="Second Flask" onClick={this.onImageClick("Flask1")}/>
+                <img src={this.state.inventoryImages[12].src} key="Flask2" alt="Third Flask" onClick={this.onImageClick("Flask2")}/>
+                <img src={this.state.inventoryImages[13].src} key="Flask3" alt="Fourth Flask" onClick={this.onImageClick("Flask3")}/>
+                <img src={this.state.inventoryImages[14].src} key="Flask4" alt="Fifth Flask" onClick={this.onImageClick("Flask4")}/>
             </div>
         )
     }

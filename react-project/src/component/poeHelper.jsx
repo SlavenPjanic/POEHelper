@@ -7,7 +7,7 @@ class POEHelper extends Component{
         this.state = {
           error: null,
           isLoaded: false,
-          accntName: '',
+          accntName: 'Annuvis',
           dropDownItems: [],
           filteredDropDown: [],
           dropDownLeague: [],
