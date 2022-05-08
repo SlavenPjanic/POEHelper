@@ -1,4 +1,0 @@
-3 sections for heros
-4 abilities 
-3-6 sections for enemies
-each hero has a selected enemy
