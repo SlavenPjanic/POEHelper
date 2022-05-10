@@ -68,19 +68,21 @@ function findMods(modList, query){
     //grab the mods TODO: make this global so that we don't have to grab everytime.
     let explicit = modList.find(exp => exp.label === "Explicit");
     let implicit = modList.find(exp => exp.label === "Implicit");
-    let psuedo = checkPseudo(query);
+    let psuedo =  modList.find(exp => exp.label === "Pseudo");
+    query = checkPseudo(query);
 
     //TODO: With the modType we can narrow our search. 
     //Need to check for similar mods and then find the appropriate Psuedo mod. 
 
 
-    for(let k = 0; k < query.length; k++){
+    for(let k = 0; k < query.length; k++){//Used to get the id for each mod
 
-        // let itemPS = psuedo.entries.find(item => item.text === query[k].modText);
-        // if(itemPS !== undefined){
-        //     query[k].push(itemPS.id);
-        //     continue;
-        // }
+        let itemPS = psuedo.entries.find(item => item.text === query[k].modText);
+        if(itemPS !== undefined){
+            console.log("yea");
+            query[k].push(itemPS.id);
+            continue;
+        }
 
         if(armour){
             if(localArmour.includes(query[k].modText)){
@@ -93,10 +95,9 @@ function findMods(modList, query){
         }
         let itemIM = implicit.entries.find(item => item.text === query[k].modText);
         if(itemIM !== undefined){
-            arr[k].push(itemIM.id);
+            query[k].push(itemIM.id);
             continue;
         } 
-
         let itemEX = explicit.entries.find(item => item.text === query[k].modText);
         if(itemEX !== undefined){
             query[k].push(itemEX.id);
@@ -104,6 +105,7 @@ function findMods(modList, query){
         } 
     }
     
+    console.log(query);
     return query;
 }
 

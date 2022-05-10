@@ -1,13 +1,9 @@
-
-
 interface PseudoRules {
     rule?: string;
     acceptedRules?: string[];
     magnitude?: number[];
     amount?: number;
 }
-
-
 
 export function createPseudoModPool(){
 
