@@ -419,4 +419,3 @@ export function createPseudoModPool(){
     //Make this global
     return([RESISTANCE_INFO,ATTRIBUTE_INFO,GLOBAL_DEFENCE_INFO,GLOBAL_OFFENCE_INFO]);
 }
-

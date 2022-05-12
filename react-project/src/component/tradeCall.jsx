@@ -27,7 +27,15 @@ export async function tradeAPICall(query, items){
         // find the item base type and specific items
         let article = adjustQuery(items, search);
         //using "https://thingproxy.freeboard.io/fetch/" as cors proxy
-        const response = await axios.post('https://thingproxy.freeboard.io/fetch/https://www.pathofexile.com/api/trade/search/Scourge', article);
+        //const response = await axios.post('https://thingproxy.freeboard.io/fetch/https://www.pathofexile.com/api/trade/search/Standard', article);
+
+        //now you have a string, and to get a json you have to do -> json_request = json.loads(article);
+        //and then:
+        let TRADE_ENDPOINT = "https://thingproxy.freeboard.io/fetch/https://www.pathofexile.com/api/trade/search/";
+        let league = 'Standard';
+        let head = {"content-Type": "application/json", "User-Agent": "PoEItemHelper"};
+        //this should work
+        const response = await axios.post(TRADE_ENDPOINT + league, article, {head});
 
         return response.data;
 }
@@ -115,32 +123,83 @@ function findMods(modList, query){
 
     }
 
-    console.log(query);
     return query;
 }
 
 function adjustQuery(items, search){
 
-    let filters = {
-            "type": "and",
-            "filters": []
-        }
+    let filters = [];
+
+    let corrupted = "false";
+    let min = 1;
+    let max = 999;
+    console.log(items);
 
     for(let i = 0; i < search.length; i++){
 
-        let explicit = {
-                            "id": search[i][search[i].length - 1], //need to change the ID and the min value.
+        let mod = {
+                            "id": search[i].modId, //need to change the ID and the min value.
                             "value": {
-                                "min": search[i][0]
+                                "min": search[i].modAmount
                             },
                             "disabled": false
                         };
 
-        filters.filters.push(explicit);
-    }
+        filters.push(mod);
+    };
 
             // Simple POST request with a JSON body using axios
-    const article = {
+    let article = 
+    {
+        "query": {
+            "status": {
+                "option": "online"
+            },
+            "stats": [
+                {
+                    "type": "and",
+                    "filters": filters
+                }
+            ],
+            "filters": {
+                "type_filters": {
+                    "filters": {
+                        "category": {
+                            "option": option
+                        },
+                        "rarity": {
+                            "option": "rare"
+                        }
+                    }
+                },
+                "misc_filters": {
+                    "disabled": false,
+                    "filters": {
+                        "corrupted": {
+                            "option": corrupted
+                        }
+                    }
+                },
+                "trade_filters": {
+                    "filters": {
+                        "price": {
+                            "min": min,
+                            "max": max
+                        }
+                    }
+                }
+            }
+        },
+        "sort": {
+            "price": "asc"
+        }
+    };//min, max, corrupted, itemType, mods
+
+    // article.query.stats.filters = filters;
+
+    // article.query.filters.type_filters.filters.category.option = option;
+
+    article = {
         "query": {
             "status": {
                 "option": "online"
@@ -149,7 +208,34 @@ function adjustQuery(items, search){
                 {
                     "type": "and",
                     "filters": [
-
+                        {
+                            "id": "pseudo.pseudo_total_life",
+                            "value": {
+                                "min": 116
+                            },
+                            "disabled": false
+                        },
+                        {
+                            "id": "pseudo.pseudo_total_cold_resistance",
+                            "value": {
+                                "min": 22
+                            },
+                            "disabled": false
+                        },
+                        {
+                            "id": "pseudo.pseudo_total_lightning_resistance",
+                            "value": {
+                                "min": 25
+                            },
+                            "disabled": false
+                        },
+                        {
+                            "id": "explicit.stat_2511217560",
+                            "value": {
+                                "min": 23
+                            },
+                            "disabled": false
+                        }
                     ]
                 }
             ],
@@ -157,7 +243,7 @@ function adjustQuery(items, search){
                 "type_filters": {
                     "filters": {
                         "category": {
-                            "option": "" // change this to the type of armor or weapon being used
+                            "option": "armour.chest"
                         },
                         "rarity": {
                             "option": "rare"
@@ -165,22 +251,27 @@ function adjustQuery(items, search){
                     }
                 },
                 "misc_filters": {
+                    "disabled": false,
                     "filters": {
                         "corrupted": {
                             "option": "false"
                         }
                     }
+                },
+                "trade_filters": {
+                    "filters": {
+                        "price": {
+                            "min": 1,
+                            "max": 999
+                        }
+                    }
                 }
             }
-        },        
+        },
         "sort": {
             "price": "asc"
         }
     };
-
-    article.query.stats.filters = filters;
-
-    article.query.filters.type_filters.filters.category.option = option;
     
     return article;
 }
@@ -242,57 +333,77 @@ function findItemType(items){
 
 }
 
-        // article = {
-        //     "query": {
-        //         "status": {
-        //             "option": "online"
-        //         },
-        //         "stats": [
-        //             {
-        //                 "type": "and",
-        //                 "filters": [
-        //                     {
-        //                         "id": "pseudo.pseudo_adds_physical_damage_to_attacks",
-        //                         "value": {
-        //                             "min": 18
-        //                         },
-        //                         "disabled": false
-        //                     },
-        //                     {
-        //                         "id": "pseudo.pseudo_increased_cold_damage",
-        //                         "value": {
-        //                             "min": 10
-        //                         },
-        //                         "disabled": false
-        //                     },
-        //                     {
-        //                         "id": "pseudo.pseudo_total_energy_shield",
-        //                         "value": {
-        //                             "min": 45
-        //                         },
-        //                         "disabled": true
-        //                     },
-        //                     {
-        //                         "id": "explicit.stat_587431675",
-        //                         "value": {
-        //                             "min": 12
-        //                         },
-        //                         "disabled": false
-        //                     }
-        //                 ]
-        //             }
-        //         ],
-        //         "filters": {
-        //             "type_filters": {
-        //                 "filters": {
-        //                     "category": {
-        //                         "option": "accessory.amulet"
-        //                     }
-        //                 }
-        //             }
-        //         }
-        //     },
-        //     "sort": {
-        //         "price": "asc"
-        //     }
-        // }
+// {
+//     "query": {
+//         "status": {
+//             "option": "online"
+//         },
+//         "stats": [
+//             {
+//                 "type": "and",
+//                 "filters": 
+//                 [
+//                     {
+//                         "id": "pseudo.pseudo_total_life",
+//                         "value": {
+//                             "min": 116
+//                         },
+//                         "disabled": false
+//                     },
+//                     {
+//                         "id": "pseudo.pseudo_total_cold_resistance",
+//                         "value": {
+//                             "min": 22
+//                         },
+//                         "disabled": false
+//                     },
+//                     {
+//                         "id": "pseudo.pseudo_total_lightning_resistance",
+//                         "value": {
+//                             "min": 25
+//                         },
+//                         "disabled": false
+//                     },
+//                     {
+//                         "id": "explicit.stat_2511217560",
+//                         "value": {
+//                             "min": 23
+//                         },
+//                         "disabled": false
+//                     }
+//                 ]
+//             }
+//         ],
+//         "filters": {
+//             "type_filters": {
+//                 "filters": {
+//                     "category": {
+//                         "option": "armour.chest"
+//                     },
+//                     "rarity": {
+//                         "option": "rare"
+//                     }
+//                 }
+//             },
+//             "misc_filters": {
+//                 "disabled": false,
+//                 "filters": {
+//                     "corrupted": {
+//                         "option": "false"
+//                     }
+//                 }
+//             },
+//             "trade_filters": {
+//                 "filters": {
+//                     "price": {
+//                         "min": 1,
+//                         "max": 999
+//                     }
+//                 }
+//             }
+//         }
+//     },
+//     "sort": {
+//         "price": "asc"
+//     }
+// }//min, max, corrupted, itemType, mods
