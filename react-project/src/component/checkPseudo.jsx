@@ -45,7 +45,7 @@ function checkPseudo (search){
       });
     }
 
-    return(foundMods);
+    return(search);
 }
 
 export default checkPseudo;

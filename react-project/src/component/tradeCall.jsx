@@ -79,8 +79,11 @@ function findMods(modList, query){
 
         let itemPS = psuedo.entries.find(item => item.text === query[k].modText);
         if(itemPS !== undefined){
-            console.log("yea");
-            query[k].push(itemPS.id);
+            let id = {
+                modId: itemPS.id
+            }
+            Object.assign(query[k], id);
+            console.log(query[k]);
             continue;
         }
 
@@ -92,19 +95,26 @@ function findMods(modList, query){
             if(localWeapom.includes(query[k].modText)){
                 query[k].modText += " (Local)";
             }
-        }
-        let itemIM = implicit.entries.find(item => item.text === query[k].modText);
-        if(itemIM !== undefined){
-            query[k].push(itemIM.id);
-            continue;
-        } 
+        }        
         let itemEX = explicit.entries.find(item => item.text === query[k].modText);
         if(itemEX !== undefined){
-            query[k].push(itemEX.id);
+            let id = {
+                modId: itemEX.id
+            }
+            Object.assign(query[k], id);
             continue;
         } 
+        let itemIM = implicit.entries.find(item => item.text === query[k].modText);
+        if(itemIM !== undefined){
+            let id = {
+                modId: itemIM.id
+            }
+            Object.assign(query[k], id);
+            continue;
+        } 
+
     }
-    
+
     console.log(query);
     return query;
 }

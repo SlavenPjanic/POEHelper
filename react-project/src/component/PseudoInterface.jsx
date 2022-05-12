@@ -23,7 +23,7 @@ export function createPseudoModPool(){
             amount: 0
         },
         {
-            rule: '+#% to Cold Resistance',
+            rule: '+#% total to Cold Resistance',
             acceptedRules: [
                 '#% to Cold Resistance',
                 '#% to Fire and Cold Resistances',
@@ -77,7 +77,7 @@ export function createPseudoModPool(){
 
     const ATTRIBUTE_INFO: PseudoRules[] = [
         {
-            rule: '+# to all Attributes',
+            rule: '+# total to all Attributes',
             acceptedRules: [
                 '# to all Attributes'
             ],
@@ -87,7 +87,7 @@ export function createPseudoModPool(){
             amount: 0
         },
         {
-            rule: '+# to Strength',
+            rule: '+# total to Strength',
             acceptedRules: [
                 '# to all Attributes',
                 '# to Strength',
@@ -100,7 +100,7 @@ export function createPseudoModPool(){
             amount: 0
         },
         {
-            rule: '+# to Dexterity',
+            rule: '+# total to Dexterity',
             acceptedRules: [
                 '# to all Attributes',
                 '# to Dexterity and Intelligence',
@@ -112,7 +112,7 @@ export function createPseudoModPool(){
             amount: 0
         },
         {
-            rule: '+# to Intelligence',
+            rule: '+# total to Intelligence',
             acceptedRules: [
                 '# to all Attributes',
                 '# to Intelligence',
