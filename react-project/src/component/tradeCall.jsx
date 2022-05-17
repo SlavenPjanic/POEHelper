@@ -29,7 +29,7 @@ export async function tradeAPICall(query, items){
         //using "https://thingproxy.freeboard.io/fetch/" as cors proxy
         //const response = await axios.post('https://thingproxy.freeboard.io/fetch/https://www.pathofexile.com/api/trade/search/Standard', article);
 
-        //USE NEW SEARCHG
+        
         //now you have a string, and to get a json you have to do -> json_request = json.loads(article);
         //and then:
         let TRADE_ENDPOINT = "https://thingproxy.freeboard.io/fetch/https://www.pathofexile.com/api/trade/search/";
